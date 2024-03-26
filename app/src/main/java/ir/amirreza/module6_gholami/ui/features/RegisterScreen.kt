@@ -90,7 +90,7 @@ fun RegisterScreen() {
                                 Toast.makeText(context, "Image Saved", Toast.LENGTH_SHORT).show()
                                 appState.scope.launch {
                                     delay(3000)
-                                    Toast.makeText(context, "You're not login", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, "You're not logged in", Toast.LENGTH_SHORT).show()
                                     (context as FragmentActivity).finish()
                                 }
                             }

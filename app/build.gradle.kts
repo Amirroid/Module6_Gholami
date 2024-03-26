@@ -83,4 +83,7 @@ dependencies {
 
     // zxiing
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+
+    // mlkit
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
 }

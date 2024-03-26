@@ -9,10 +9,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import ir.amirreza.module6_gholami.data.states.LocaleAppState
 import ir.amirreza.module6_gholami.ui.features.home.HomeScreen
+import ir.amirreza.module6_gholami.ui.features.qr_code.QrCodeScreen
 import ir.amirreza.module6_gholami.ui.features.register.RegisterScreen
 import ir.amirreza.module6_gholami.ui.theme.Module6_GholamiTheme
 import ir.amirreza.module6_gholami.utils.AppPages
@@ -36,14 +39,20 @@ class MainActivity : FragmentActivity() {
 
 @Composable
 fun SetUpNavHost() {
-        val appState = LocaleAppState.current
+    val appState = LocaleAppState.current
     val navigation = appState.navigation
-    NavHost(navController = navigation, startDestination = AppPages.Register.route){
-        composable(AppPages.Register.route){
+    NavHost(navController = navigation, startDestination = AppPages.Register.route) {
+        composable(AppPages.Register.route) {
             RegisterScreen()
         }
-        composable(AppPages.Home.route){
+        composable(AppPages.Home.route) {
             HomeScreen()
+        }
+        composable(AppPages.QrCode.route + "?key={key}", arguments = listOf(navArgument("key") {
+            type = NavType.StringType
+        })) {
+            val data = it.arguments?.getString("key") ?: ""
+            QrCodeScreen(data)
         }
     }
 }

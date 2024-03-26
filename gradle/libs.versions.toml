@@ -1,5 +1,6 @@
 [versions]
 agp = "8.4.0-alpha03"
+biometric = "1.2.0-alpha05"
 cameraMlkitVision = "1.4.0-alpha04"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
@@ -12,6 +13,7 @@ composeBom = "2023.08.00"
 navigationCompose = "2.7.7"
 
 [libraries]
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraMlkitVision" }
 androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraMlkitVision" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraMlkitVision" }

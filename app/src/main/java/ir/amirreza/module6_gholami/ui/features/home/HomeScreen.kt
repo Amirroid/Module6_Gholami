@@ -40,6 +40,7 @@ import androidx.fragment.app.FragmentActivity
 import ir.amirreza.module6_gholami.R
 import ir.amirreza.module6_gholami.data.helpers.CrypticHelper
 import ir.amirreza.module6_gholami.data.states.LocaleAppState
+import ir.amirreza.module6_gholami.utils.AppPages
 import ir.amirreza.module6_gholami.utils.checkPermission
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -118,7 +119,10 @@ fun HomeScreen() {
             }
         }
         onDispose {
-            stop()
+            runCatching {
+                stop()
+            }
+            recorder = null
         }
     }
 
@@ -137,7 +141,9 @@ fun HomeScreen() {
             .systemBarsPadding()
             .fillMaxSize()
     ) {
-        IconButton(onClick = {}, modifier = Modifier.align(Alignment.Start)) {
+        IconButton(onClick = {
+            appState.navigation.navigate(AppPages.QrCode.route + "?key=" + crypticHelper.key.encoded.toString())
+        }, modifier = Modifier.align(Alignment.Start)) {
             Icon(
                 painter = painterResource(id = R.drawable.baseline_camera_alt_24),
                 contentDescription = null
@@ -168,10 +174,12 @@ fun HomeScreen() {
                             record()
                         },
                     ) {
-                        if (permission.not()) return@detectTapGestures
-                        timeAdd = 0
-                        sendEnable = true
-                        pause()
+                        if (sendEnable.not()){
+                            if (permission.not()) return@detectTapGestures
+                            timeAdd = 0
+                            sendEnable = true
+                            pause()
+                        }
                     }
                 }, contentAlignment = Alignment.Center
         ) {

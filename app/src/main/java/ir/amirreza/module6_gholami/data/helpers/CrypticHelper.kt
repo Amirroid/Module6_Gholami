@@ -1,6 +1,7 @@
 package ir.amirreza.module6_gholami.data.helpers
 
 import android.content.Context
+import android.os.FileUtils
 import android.security.keystore.KeyProperties
 import java.io.File
 import java.io.FileInputStream
@@ -32,14 +33,11 @@ class CrypticHelper {
         return cipher.doFinal(input)
     }
 
-    fun encryptFile(context: Context, file: File): File {
+    fun encryptFile(file: File) {
         val fis = FileInputStream(file)
         val encrypted = encrypt(fis.readBytes())
-        val encryptedFile = File(context.cacheDir, "e${System.currentTimeMillis()}.mp3")
-        encryptedFile.createNewFile()
-        val fos = FileOutputStream(encryptedFile)
+        val fos = FileOutputStream(file)
         fos.write(encrypted, 0, encrypted.size)
-        return encryptedFile
     }
 
     companion object {

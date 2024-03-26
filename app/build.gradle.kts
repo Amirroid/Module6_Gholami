@@ -71,12 +71,10 @@ dependencies {
 
 
     // camerax
-//    val camerax_version = "1.4.0-alpha04"
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.camera2)
-    implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
-//    implementation(libs.androidx.camera.mlkit.vision)
+    implementation(libs.androidx.camera.lifecycle)
 
     // biometric
     implementation(libs.androidx.biometric)
@@ -86,4 +84,7 @@ dependencies {
 
     // mlkit
     implementation("com.google.mlkit:barcode-scanning:17.2.0")
+  implementation("com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0")
+
+
 }

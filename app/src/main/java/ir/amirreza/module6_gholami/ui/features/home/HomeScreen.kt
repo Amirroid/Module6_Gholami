@@ -142,7 +142,7 @@ fun HomeScreen() {
             .fillMaxSize()
     ) {
         IconButton(onClick = {
-            appState.navigation.navigate(AppPages.QrCode.route + "?key=" + crypticHelper.key.encoded.toString())
+            appState.navigation.navigate(AppPages.QrCodeScanner.route)
         }, modifier = Modifier.align(Alignment.Start)) {
             Icon(
                 painter = painterResource(id = R.drawable.baseline_camera_alt_24),
@@ -174,7 +174,7 @@ fun HomeScreen() {
                             record()
                         },
                     ) {
-                        if (sendEnable.not()){
+                        if (sendEnable.not()) {
                             if (permission.not()) return@detectTapGestures
                             timeAdd = 0
                             sendEnable = true
@@ -193,8 +193,10 @@ fun HomeScreen() {
             time = 0
             stop()
             appState.scope.launch {
-                crypticHelper.encryptFile(context, file)
+                crypticHelper.encryptFile(file)
+                appState.navigation.navigate(AppPages.QrCode.route + "?key=" + crypticHelper.key.encoded.toString())
             }
+
         }, enabled = sendEnable, modifier = Modifier.padding(top = 12.dp)) {
             Text(text = "Send")
         }

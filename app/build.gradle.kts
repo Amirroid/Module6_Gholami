@@ -80,11 +80,19 @@ dependencies {
     implementation(libs.androidx.biometric)
 
     // zxiing
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation(libs.zxing.android.embedded)
 
     // mlkit
-    implementation("com.google.mlkit:barcode-scanning:17.2.0")
-  implementation("com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.0")
+    implementation(libs.barcode.scanning)
+    implementation(libs.play.services.mlkit.barcode.scanning)
+
+
+    // lifecycle
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+
+    // fragment
+    implementation(libs.androidx.fragment.ktx)
 
 
 }

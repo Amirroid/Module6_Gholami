@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,12 +22,15 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.unit.dp
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import ir.amirreza.module6_gholami.data.states.LocaleAppState
+import ir.amirreza.module6_gholami.utils.AppPages
 
 @Composable
-fun QrCodeScreen(key: String, filename:String) {
+fun QrCodeScreen(key: String, filename: String) {
     var bitmap by remember {
         mutableStateOf<ImageBitmap?>(null)
     }
+    val appState = LocaleAppState.current
     LaunchedEffect(key1 = Unit) {
         val barcodeEncoder = BarcodeEncoder()
         runCatching {
@@ -51,5 +55,12 @@ fun QrCodeScreen(key: String, filename:String) {
             )
         }
         Text(text = "Scan to receive", modifier = Modifier.padding(top = 12.dp))
+        Button(onClick = {
+            appState.navigation.navigate(
+                AppPages.Devices.route + "?filename=" + filename
+            )
+        }) {
+            Text(text = "Go to send")
+        }
     }
 }

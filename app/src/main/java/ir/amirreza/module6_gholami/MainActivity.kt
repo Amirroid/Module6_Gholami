@@ -1,5 +1,7 @@
 package ir.amirreza.module6_gholami
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import ir.amirreza.module6_gholami.data.states.LocaleAppState
+import ir.amirreza.module6_gholami.ui.features.devices.DevicesScreen
 import ir.amirreza.module6_gholami.ui.features.home.HomeScreen
 import ir.amirreza.module6_gholami.ui.features.qr_code.QrCodeScreen
 import ir.amirreza.module6_gholami.ui.features.qr_code_scanner.QrCodeScannerScreen
@@ -28,6 +31,25 @@ class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.BLUETOOTH,
+                    Manifest.permission.BLUETOOTH_CONNECT,
+                    Manifest.permission.BLUETOOTH_SCAN,
+                    Manifest.permission.BLUETOOTH_ADMIN,
+                ),
+                100
+            )
+        }else{
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.BLUETOOTH,
+                    Manifest.permission.BLUETOOTH_ADMIN,
+                ),
+                0
+            )
+        }
         setContent {
             Module6_GholamiTheme {
                 Surface(
@@ -67,6 +89,15 @@ fun SetUpNavHost() {
             val data = it.arguments?.getString("key") ?: ""
             val filename = it.arguments?.getString("filename") ?: ""
             QrCodeScreen(data, filename)
+        }
+        composable(
+            AppPages.Devices.route + "?filename={filename}",
+            arguments = listOf(navArgument("filename") {
+                type = NavType.StringType
+            })
+        ) {
+            val filename = it.arguments?.getString("filename") ?: ""
+            DevicesScreen()
         }
     }
 }

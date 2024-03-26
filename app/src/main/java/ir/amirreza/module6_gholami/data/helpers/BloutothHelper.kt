@@ -30,6 +30,10 @@ class BluetoothHelper(private val context: Context) {
     val devices = _devices.asStateFlow().map { it.toList().distinct() }
 
 
+    private val _devices = MutableStateFlow<Set<BluetoothDevice>>(emptySet())
+    val devices = _devices.asStateFlow().map { it.toList().distinct() }
+
+
     private val receiver = FoundDeviceListener { device ->
         _devices.update {
             if (device !in it) {

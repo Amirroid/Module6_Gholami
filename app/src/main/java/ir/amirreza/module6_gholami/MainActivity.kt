@@ -56,11 +56,17 @@ fun SetUpNavHost() {
         composable(AppPages.QrCodeScanner.route) {
             QrCodeScannerScreen()
         }
-        composable(AppPages.QrCode.route + "?key={key}", arguments = listOf(navArgument("key") {
-            type = NavType.StringType
-        })) {
+        composable(
+            AppPages.QrCode.route + "?key={key}&filename={filename}",
+            arguments = listOf(navArgument("key") {
+                type = NavType.StringType
+            }, navArgument("filename") {
+                type = NavType.StringType
+            })
+        ) {
             val data = it.arguments?.getString("key") ?: ""
-            QrCodeScreen(data)
+            val filename = it.arguments?.getString("filename") ?: ""
+            QrCodeScreen(data, filename)
         }
     }
 }

@@ -194,7 +194,7 @@ fun HomeScreen() {
             stop()
             appState.scope.launch {
                 crypticHelper.encryptFile(file)
-                appState.navigation.navigate(AppPages.QrCode.route + "?key=" + crypticHelper.key.encoded.toString())
+                appState.navigation.navigate(AppPages.QrCode.route + "?key=" + crypticHelper.key.encoded.toString() + "&filename=" + file.name)
             }
 
         }, enabled = sendEnable, modifier = Modifier.padding(top = 12.dp)) {

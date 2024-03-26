@@ -23,7 +23,7 @@ import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 
 @Composable
-fun QrCodeScreen(key: String) {
+fun QrCodeScreen(key: String, filename:String) {
     var bitmap by remember {
         mutableStateOf<ImageBitmap?>(null)
     }

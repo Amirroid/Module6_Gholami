@@ -1,4 +1,4 @@
-package ir.amirreza.module6_gholami.ui.features
+package ir.amirreza.module6_gholami.ui.features.register
 
 import android.content.ContentValues
 import android.content.Intent
@@ -6,8 +6,6 @@ import android.os.Build
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
-import android.view.SurfaceHolder
-import android.view.SurfaceView
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -28,7 +26,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import ir.amirreza.module6_gholami.data.states.LocaleAppState
 import ir.amirreza.module6_gholami.utils.AppPages
-import ir.amirreza.module6_gholami.utils.NothingSurfaceHolder
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

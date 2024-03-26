@@ -12,7 +12,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ir.amirreza.module6_gholami.data.states.LocaleAppState
-import ir.amirreza.module6_gholami.ui.features.RegisterScreen
+import ir.amirreza.module6_gholami.ui.features.home.HomeScreen
+import ir.amirreza.module6_gholami.ui.features.register.RegisterScreen
 import ir.amirreza.module6_gholami.ui.theme.Module6_GholamiTheme
 import ir.amirreza.module6_gholami.utils.AppPages
 
@@ -42,7 +43,7 @@ fun SetUpNavHost() {
             RegisterScreen()
         }
         composable(AppPages.Home.route){
-            RegisterScreen()
+            HomeScreen()
         }
     }
 }

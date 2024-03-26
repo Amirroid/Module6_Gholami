@@ -26,6 +26,8 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 import com.google.zxing.BarcodeFormat
+import ir.amirreza.module6_gholami.data.states.LocaleAppState
+import ir.amirreza.module6_gholami.utils.AppPages
 
 @ExperimentalGetImage
 @Composable
@@ -41,6 +43,7 @@ fun QrCodeScannerScreen() {
     val previewView = remember {
         PreviewView(context)
     }
+    val appState = LocaleAppState.current
     DisposableEffect(key1 = Unit) {
         val cameraProvider = ProcessCameraProvider.getInstance(context)
         cameraProvider.addListener(
@@ -61,13 +64,14 @@ fun QrCodeScannerScreen() {
                                             it.imageInfo.rotationDegrees
                                         )
                                     client.process(inputMedia).addOnSuccessListener { barcodes ->
-                                        barcodes.forEach { barcode ->
-                                            Toast.makeText(
-                                                context,
-                                                barcode.rawValue,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
+                                        barcodes.firstOrNull { barcode ->  barcode.rawValue != null }
+                                            ?.let { barcode ->
+                                                Toast.makeText(context, "", Toast.LENGTH_SHORT)
+                                                    .show()
+                                                appState.navigation.navigate(
+                                                    AppPages.ReceiveFile.route + "?key=" + barcode.rawValue!!
+                                                )
+                                            }
                                     }.addOnFailureListener { fail ->
                                         Log.e(
                                             "dfsgjfiuehguid",

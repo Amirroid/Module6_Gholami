@@ -6,4 +6,6 @@ sealed class AppPages(val route: String) {
     data object QrCodeScanner: AppPages("QrCodeScanner")
     data object QrCode: AppPages("qrcode")
     data object Devices: AppPages("devices")
+    data object SendFile: AppPages("send_file")
+    data object ReceiveFile: AppPages("receive_file")
 }

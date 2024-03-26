@@ -22,7 +22,9 @@ import ir.amirreza.module6_gholami.ui.features.devices.DevicesScreen
 import ir.amirreza.module6_gholami.ui.features.home.HomeScreen
 import ir.amirreza.module6_gholami.ui.features.qr_code.QrCodeScreen
 import ir.amirreza.module6_gholami.ui.features.qr_code_scanner.QrCodeScannerScreen
+import ir.amirreza.module6_gholami.ui.features.receive_file.ReceiveFileScreen
 import ir.amirreza.module6_gholami.ui.features.register.RegisterScreen
+import ir.amirreza.module6_gholami.ui.features.send.SendFileScreen
 import ir.amirreza.module6_gholami.ui.theme.Module6_GholamiTheme
 import ir.amirreza.module6_gholami.utils.AppPages
 
@@ -41,7 +43,7 @@ class MainActivity : FragmentActivity() {
                 ),
                 100
             )
-        }else{
+        } else {
             requestPermissions(
                 arrayOf(
                     Manifest.permission.BLUETOOTH,
@@ -97,7 +99,28 @@ fun SetUpNavHost() {
             })
         ) {
             val filename = it.arguments?.getString("filename") ?: ""
-            DevicesScreen()
+            DevicesScreen(filename)
+        }
+        composable(
+            AppPages.SendFile.route + "?filename={filename}&address={address}",
+            arguments = listOf(navArgument("filename") {
+                type = NavType.StringType
+            }, navArgument("address") {
+                type = NavType.StringType
+            })
+        ) {
+            val filename = it.arguments?.getString("filename") ?: ""
+            val address = it.arguments?.getString("address") ?: ""
+            SendFileScreen(address)
+        }
+        composable(
+            AppPages.ReceiveFile.route + "?key={key}",
+            arguments = listOf(navArgument("key") {
+                type = NavType.StringType
+            })
+        ) {
+            val key = it.arguments?.getString("key") ?: ""
+            ReceiveFileScreen()
         }
     }
 }

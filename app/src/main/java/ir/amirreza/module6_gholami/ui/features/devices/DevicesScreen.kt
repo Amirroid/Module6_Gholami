@@ -38,6 +38,7 @@ fun DevicesScreen(filename: String) {
         BluetoothHelper(context)
     }
     val appState = LocaleAppState.current
+<<<<<<< Updated upstream
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
@@ -52,9 +53,27 @@ fun DevicesScreen(filename: String) {
             val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             launcher.launch(intent)
         } else {
+=======
+    val requestDiscoverableLancer =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
+>>>>>>> Stashed changes
             bluetoothHelper.getAllDevices()
         }
-        onDispose { bluetoothHelper.release() }
+    val devices by bluetoothHelper.devices.collectAsStateWithLifecycle(emptyList())
+    val scannedDevices by bluetoothHelper.scannedDevices.collectAsStateWithLifecycle(emptyList())
+
+    DisposableEffect(key1 = Unit) {
+//        if (bluetoothHelper.isEnabled.not()) {
+//            val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+//            launcher.launch(intent)
+//        } else {
+        val intent = Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE)
+        intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3000)
+        requestDiscoverableLancer.launch(intent)
+//        }
+        onDispose {
+            bluetoothHelper.release()
+        }
     }
     Column {
         CenterAlignedTopAppBar(title = { Text(text = "Devices") })
@@ -78,6 +97,7 @@ fun DevicesScreen(filename: String) {
                         )
                     }, modifier = Modifier.clickable {
                         appState.navigation.navigate(AppPages.SendFile.route + "?filename=$filename&address=${device.address}")
+<<<<<<< Updated upstream
                     })
             }
             item("scanned") {
@@ -97,7 +117,38 @@ fun DevicesScreen(filename: String) {
                         Text(
                             text = device.address
                         )
+=======
+>>>>>>> Stashed changes
                     })
+            }
+            item("scanned") {
+                Text(
+                    text = "Scanned devices",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier
+                        .padding(vertical = 12.dp)
+                        .padding(start = 8.dp)
+                )
+            }
+            items(scannedDevices, key = { it.address }) { device ->
+                if (device.name.isNullOrEmpty()) {
+                    ListItem(
+                        headlineContent = { Text(text = device.address ?: "") },
+                        modifier = Modifier.clickable {
+                            appState.navigation.navigate(AppPages.SendFile.route + "?filename=$filename&address=${device.address}")
+                        })
+                } else {
+                    ListItem(
+                        headlineContent = { Text(text = device.name ?: "") },
+                        supportingContent = {
+                            Text(
+                                text = device.address ?: ""
+                            )
+                        }, modifier = Modifier.clickable {
+                            appState.navigation.navigate(AppPages.SendFile.route + "?filename=$filename&address=${device.address}")
+                        })
+                }
             }
         }
     }

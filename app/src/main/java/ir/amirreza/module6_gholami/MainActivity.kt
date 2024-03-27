@@ -1,7 +1,5 @@
 package ir.amirreza.module6_gholami
 
-import android.Manifest
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -21,7 +19,11 @@ import ir.amirreza.module6_gholami.data.states.LocaleAppState
 import ir.amirreza.module6_gholami.ui.features.devices.DevicesScreen
 import ir.amirreza.module6_gholami.ui.features.home.HomeScreen
 import ir.amirreza.module6_gholami.ui.features.qr_code.QrCodeScreen
+<<<<<<< Updated upstream
 import ir.amirreza.module6_gholami.ui.features.qr_code_scanner.QrCodeScannerScreen
+=======
+import ir.amirreza.module6_gholami.ui.features.qr_code.QrCodeScannerScreen
+>>>>>>> Stashed changes
 import ir.amirreza.module6_gholami.ui.features.receive_file.ReceiveFileScreen
 import ir.amirreza.module6_gholami.ui.features.register.RegisterScreen
 import ir.amirreza.module6_gholami.ui.features.send.SendFileScreen
@@ -33,6 +35,7 @@ class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+<<<<<<< Updated upstream
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             requestPermissions(
                 arrayOf(
@@ -52,6 +55,31 @@ class MainActivity : FragmentActivity() {
                 0
             )
         }
+=======
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            requestPermissions(
+//                arrayOf(
+//                    Manifest.permission.BLUETOOTH,
+//                    Manifest.permission.BLUETOOTH_CONNECT,
+//                    Manifest.permission.BLUETOOTH_SCAN,
+//                    Manifest.permission.BLUETOOTH_ADMIN,
+//                    Manifest.permission.ACCESS_FINE_LOCATION,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION,
+//                ),
+//                100
+//            )
+//        } else {
+//            requestPermissions(
+//                arrayOf(
+//                    Manifest.permission.BLUETOOTH,
+//                    Manifest.permission.BLUETOOTH_ADMIN,
+//                    Manifest.permission.ACCESS_FINE_LOCATION,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION,
+//                ),
+//                0
+//            )
+//        }
+>>>>>>> Stashed changes
         setContent {
             Module6_GholamiTheme {
                 Surface(
@@ -70,7 +98,7 @@ class MainActivity : FragmentActivity() {
 fun SetUpNavHost() {
     val appState = LocaleAppState.current
     val navigation = appState.navigation
-    NavHost(navController = navigation, startDestination = AppPages.Home.route) {
+    NavHost(navController = navigation, startDestination = AppPages.Register.route) {
         composable(AppPages.Register.route) {
             RegisterScreen()
         }
@@ -111,7 +139,11 @@ fun SetUpNavHost() {
         ) {
             val filename = it.arguments?.getString("filename") ?: ""
             val address = it.arguments?.getString("address") ?: ""
+<<<<<<< Updated upstream
             SendFileScreen(address)
+=======
+            SendFileScreen(address, filename)
+>>>>>>> Stashed changes
         }
         composable(
             AppPages.ReceiveFile.route + "?key={key}",
@@ -120,7 +152,11 @@ fun SetUpNavHost() {
             })
         ) {
             val key = it.arguments?.getString("key") ?: ""
+<<<<<<< Updated upstream
             ReceiveFileScreen()
+=======
+            ReceiveFileScreen(key)
+>>>>>>> Stashed changes
         }
     }
 }

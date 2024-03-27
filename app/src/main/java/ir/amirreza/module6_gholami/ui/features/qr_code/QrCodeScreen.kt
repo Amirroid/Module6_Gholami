@@ -1,66 +1,76 @@
 package ir.amirreza.module6_gholami.ui.features.qr_code
 
-import android.graphics.Bitmap
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import android.widget.Toast
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ExperimentalGetImage
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.unit.dp
-import com.google.zxing.BarcodeFormat
-import com.journeyapps.barcodescanner.BarcodeEncoder
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
 import ir.amirreza.module6_gholami.data.states.LocaleAppState
 import ir.amirreza.module6_gholami.utils.AppPages
+import ir.amirreza.module6_gholami.utils.QrCodeAnalyzer
 
+@ExperimentalGetImage
 @Composable
-fun QrCodeScreen(key: String, filename: String) {
-    var bitmap by remember {
-        mutableStateOf<ImageBitmap?>(null)
+fun QrCodeScannerScreen() {
+    val context = LocalContext.current
+    val lifecycle = LocalLifecycleOwner.current
+    val previewView = remember {
+        PreviewView(context)
     }
     val appState = LocaleAppState.current
-    LaunchedEffect(key1 = Unit) {
-        val barcodeEncoder = BarcodeEncoder()
-        runCatching {
-            bitmap = barcodeEncoder.encodeBitmap(
-                key,
-                BarcodeFormat.QR_CODE,
-                1000,
-                1000,
-            ).asImageBitmap()
-        }
+    DisposableEffect(key1 = Unit) {
+        val cameraProvider = ProcessCameraProvider.getInstance(context)
+        cameraProvider.addListener(
+            {
+                var imageAnalyzed= false
+                val cameraFuture = cameraProvider.get()
+                val imageAnalysis = ImageAnalysis.Builder()
+                    .setImageQueueDepth(1)
+                    .build().apply {
+                        setAnalyzer(
+                            ContextCompat.getMainExecutor(context),
+                            QrCodeAnalyzer(
+                                previewView
+                            ) {
+                                if (imageAnalyzed.not()){
+                                    Toast.makeText(context, it, Toast.LENGTH_SHORT)
+                                        .show()
+                                    appState.navigation.navigate(
+                                        AppPages.ReceiveFile.route + "?key=" + it
+                                    )
+                                    imageAnalyzed = true
+                                }
+                            }
+                        )
+                    }
+                val preview = Preview.Builder().build()
+                    .apply { setSurfaceProvider(previewView.surfaceProvider) }
+                try {
+                    cameraFuture.unbindAll()
+                    cameraFuture.bindToLifecycle(
+                        lifecycle,
+                        CameraSelector.DEFAULT_BACK_CAMERA,
+                        preview,
+                        imageAnalysis
+                    )
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            },
+            ContextCompat.getMainExecutor(context),
+        )
+        onDispose { }
     }
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        if (bitmap != null) {
-            Image(
-                bitmap = bitmap!!,
-                contentDescription = null,
-                modifier = Modifier.size(200.dp)
-            )
-        }
-        Text(text = "Scan to receive", modifier = Modifier.padding(top = 12.dp))
-        Button(onClick = {
-            appState.navigation.navigate(
-                AppPages.Devices.route + "?filename=" + filename
-            )
-        }) {
-            Text(text = "Go to send")
-        }
-    }
+    AndroidView(factory = {
+        previewView
+    })
 }

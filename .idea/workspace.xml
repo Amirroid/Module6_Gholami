@@ -10,24 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c058246-77d3-4e76-9232-a5dcb8336476" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BloutothTest/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BloutothTest/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BloutothTest/app/src/main/java/ir/amirreza/bloutothtest/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../BloutothTest/app/src/main/java/ir/amirreza/bloutothtest/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/ui/features/qr_code/QrCodeScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/ui/features/qr_code/QrCodeScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/ui/features/register/RegisterScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/ui/features/register/RegisterScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/utils/AppPages.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/utils/AppPages.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +42,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/Library/Caches/Google/AndroidStudioPreview2023.3/device-explorer/Resizable (Experimental) API 33/_/data/data/ir.amirreza.module6_gholami/cache/1711455875258.mp3" root0="SKIP_INSPECTION" />
@@ -78,12 +65,16 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "D",
+    "git-widget-placeholder": "Problem",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/amirreza/AndroidStudioProjects/Module6_Gholami/app/src/main/java/ir/amirreza/module6_gholami/ui/features",
     "settings.editor.selected.configurable": "configurable.group.appearance"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/ui/features" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/java/ir/amirreza/module6_gholami/ui/features/register" />
     </key>

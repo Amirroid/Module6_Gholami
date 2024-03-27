@@ -11,6 +11,10 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+<<<<<<< Updated upstream
+=======
+import androidx.compose.runtime.mutableFloatStateOf
+>>>>>>> Stashed changes
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -27,10 +31,18 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+<<<<<<< Updated upstream
 
 @SuppressLint("MissingPermission")
 @Composable
 fun SendFileScreen(address: String) {
+=======
+import java.io.File
+
+@SuppressLint("MissingPermission")
+@Composable
+fun SendFileScreen(address: String, filename: String) {
+>>>>>>> Stashed changes
     val context = LocalContext.current
     val helper = remember {
         BluetoothHelper(context)
@@ -40,11 +52,18 @@ fun SendFileScreen(address: String) {
     var connecting by remember {
         mutableStateOf(true)
     }
+<<<<<<< Updated upstream
+=======
+    var progress by remember {
+        mutableFloatStateOf(0f)
+    }
+>>>>>>> Stashed changes
     DisposableEffect(key1 = Unit) {
         helper.getAllDevices()
         scope.launch(Dispatchers.IO) {
             helper.devices.first()
             helper.scannedDevices.first()
+<<<<<<< Updated upstream
             helper.connectToAddress(address).launchIn(this)
             launch {
                 helper.connected.collect {
@@ -63,6 +82,26 @@ fun SendFileScreen(address: String) {
                             Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                             appState.navigation.popBackStack()
                         }
+=======
+            helper.connectToAddress(address).collect {
+                if (it is ConnectiveStatus.Success) {
+                    launch(Dispatchers.IO) {
+                        helper.sendFile(File(context.cacheDir, filename))
+                        progress = 1f
+                    }
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            context,
+                            "Connected successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        connecting = false
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                        appState.navigation.popBackStack()
+>>>>>>> Stashed changes
                     }
                 }
             }
@@ -79,7 +118,11 @@ fun SendFileScreen(address: String) {
         if (connecting) {
             CircularProgressIndicator()
         } else {
+<<<<<<< Updated upstream
             LinearProgressIndicator(progress = 1f, modifier = Modifier.fillMaxWidth(0.6f))
+=======
+            LinearProgressIndicator(progress = progress, modifier = Modifier.fillMaxWidth(0.6f))
+>>>>>>> Stashed changes
         }
     }
 }

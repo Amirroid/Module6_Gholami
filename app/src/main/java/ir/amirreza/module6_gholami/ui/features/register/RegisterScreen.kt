@@ -19,6 +19,8 @@ import androidx.camera.view.PreviewView
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
@@ -161,5 +163,5 @@ fun RegisterScreen() {
             else -> Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
         }
     }
-    AndroidView(factory = { previewView })
+    AndroidView(factory = { previewView }, modifier = Modifier.alpha(0f))
 }
